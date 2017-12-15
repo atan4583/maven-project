@@ -24,12 +24,12 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "cp **/target/*.war ${tomcat1_folder}"
+                        sh "rsync **/target/*.war audreytan@${params.tomcat_server}:${tomcat1_folder}"
                     }
                 }
                 stage ("Deploy to Production"){
                     steps {
-                        sh "cp **/target/*.war ${params.tomcat_server}:${tomcat2_folder}"
+                        sh "rsync **/target/*.war audreytan@${params.tomcat_server}:${tomcat2_folder}"
                     }
                 }
             }
